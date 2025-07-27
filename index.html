@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>聆聽讀書計畫</title>
@@ -33,7 +34,9 @@
     }
 
     h1 .icon {
-      color: #000000;$1
+      font-size: 64px;
+      color: #808080;
+      filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.25));
     }
 
     .pulse {
@@ -82,7 +85,7 @@
   </style>
 </head>
 <body>
-  <h1><span class="icon">🎧</span>Short-Term Goals</h1>
+  <h1><i class="fa-solid fa-headphones icon"></i>Short-Term Goals</h1>
   <div id="pulseText" class="pulse">點一下畫面開始播放</div>
 
   <audio id="player" controls autoplay>
