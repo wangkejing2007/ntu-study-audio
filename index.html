@@ -21,15 +21,25 @@
     }
 
     h1 {
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
       font-size: 56px;
-      font-weight: 900;
-      color: #334155;
-      margin-bottom: 5px;
+      font-weight: 1000;
+      font-family: "Noto Sans TC", "黑體-繁", "微軟正黑體", sans-serif;
+      color: #5E6060;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    h1 .icon {
+      color: #000000;$1
     }
 
     .pulse {
-      font-size: 18px;
-      color: #64748b;
+      font-size: 24px;
+      font-weight: bold;
+      color: #7f1d1d;
       animation: pulse 1.4s ease-in-out infinite;
       margin-bottom: 30px;
     }
@@ -57,7 +67,7 @@
     }
 
     audio {
-      width: 60%;
+      width: 50%;
       border: 2px solid rgba(0, 0, 0, 0.3);
       border-radius: 12px;
       padding: 8px;
@@ -72,7 +82,7 @@
   </style>
 </head>
 <body>
-  <h1>🎧 Short-Term Goals</h1>
+  <h1><span class="icon">🎧</span>Short-Term Goals</h1>
   <div id="pulseText" class="pulse">點一下畫面開始播放</div>
 
   <audio id="player" controls autoplay>
