@@ -1,81 +1,112 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>聆聽讀書計畫</title>
-    <style>
-        html, body {
-            margin: 0;
-            overflow: hidden;
-        }
-        body {
-            font-family: "Helvetica Neue", "微軟正黑體", sans-serif;
-            background-color: #f3f3f3;
-            color: #333;
-            text-align: center;
-            padding: 40px 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            width: 100vw;
-        }
-        h1 {
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #000;
-        }
-        .pulse {
-            font-size: 20px;
-            color: #555;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { opacity: 0.2; }
-            50% { opacity: 1; }
-            100% { opacity: 0.2; }
-        }
-        audio {
-            width: 80%;
-            max-width: 500px;
-        }
-        .note {
-            font-size: 14px;
-            color: #666;
-            margin-top: 20px;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>聆聽讀書計畫</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Helvetica Neue", "微軟正黑體", sans-serif;
+      background: radial-gradient(circle at center, #fef9f9, #d6e4f0);
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    h1 {
+      font-size: 56px;
+      font-weight: 900;
+      color: #334155;
+      margin-bottom: 5px;
+    }
+
+    .pulse {
+      font-size: 18px;
+      color: #64748b;
+      animation: pulse 1.4s ease-in-out infinite;
+      margin-bottom: 30px;
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 0.1;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0.1;
+      }
+    }
+
+    .note {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 15px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    audio {
+      width: 60%;
+      border: 2px solid rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      padding: 8px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      audio {
+        width: 90%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>🎧 Short-Term Goals</h1>
-    <div class="pulse">正在自動播放...</div>
-    <audio id="player" controls autoplay aria-label="音訊播放器">
-        <source src="audio.mp3" type="audio/mpeg">
-        您的瀏覽器不支援音訊播放。
-    </audio>
-    <div class="note">⚠️ 若未自動播放，請點擊播放器或更換瀏覽器設定。</div>
+  <h1>🎧 Short-Term Goals</h1>
+  <div id="pulseText" class="pulse">點一下畫面開始播放</div>
 
-    <script>
-        window.addEventListener("DOMContentLoaded", () => {
-            const player = document.getElementById("player");
-            const playPromise = player.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    console.warn("自動播放失敗：", error);
-                });
-            }
+  <audio id="player" controls autoplay>
+    <source src="audio.mp3" type="audio/mpeg" />
+    您的瀏覽器不支援音訊播放。
+  </audio>
 
-            player.addEventListener("ended", () => {
-                player.classList.add("hidden");
-            });
-        });
-    </script>
+  <div class="note">
+    ⚠️ 若未自動播放，請點擊畫面或使用控制鍵操作。
+  </div>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const player = document.getElementById("player");
+      const pulseText = document.getElementById("pulseText");
+
+      function handlePlay() {
+        if (player) {
+          player.play();
+          if (pulseText) pulseText.classList.add("hidden");
+        }
+      }
+
+      document.body.addEventListener("click", handlePlay);
+
+      if (player) {
+        const playPromise = player.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((error) => {
+            console.warn("自動播放失敗：", error);
+          });
+        }
+      }
+    });
+  </script>
 </body>
 </html>
