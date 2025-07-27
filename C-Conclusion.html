@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>聆聽讀書計畫</title>
+  <title>聽書計劃</title>
   <style>
     html,
     body {
@@ -22,29 +22,21 @@
     }
 
     h1 {
-      
-      font-size: 64px;
+      font-size: 48px;
       font-weight: 500;
       font-family: "Noto Sans TC", "黑體-繁", "微軟正黑體", sans-serif;
       color: #000000;
       margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    h1 .icon {
-      font-size: 56px;
-      color: #000000;
-
+      text-align: center;
     }
 
     .pulse {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: bold;
       color: #7f1d1d;
-      animation: pulse 1.4s ease-in-out infinite;
+      animation: pulse 2s ease-in-out infinite;
       margin-bottom: 30px;
+      text-align: center;
     }
 
     @keyframes pulse {
@@ -63,6 +55,7 @@
       font-size: 13px;
       color: #64748b;
       margin-top: 15px;
+      text-align: center;
     }
 
     .hidden {
@@ -70,7 +63,7 @@
     }
 
     audio {
-      width: 50%;
+      width: 45%;
       border: 2px solid rgba(0, 0, 0, 0.3);
       border-radius: 12px;
       padding: 8px;
@@ -79,16 +72,19 @@
 
     @media (max-width: 768px) {
       audio {
-        width: 90%;
+        width: 75%;
+      }
+      h1 {
+        font-size: 32px;
       }
     }
   </style>
 </head>
 <body>
-  <h1><i class="fa-solid fa-headphones icon"></i>結 語</h1>
+  <h1>結 語</h1>
   <div id="pulseText" class="pulse">點一下畫面開始播放</div>
 
-  <audio id="player" controls autoplay>
+  <audio id="player" controls>
     <source src="NTU-C-Conclusion.mp3" type="audio/mpeg" />
     您的瀏覽器不支援音訊播放。
   </audio>
@@ -102,23 +98,14 @@
       const player = document.getElementById("player");
       const pulseText = document.getElementById("pulseText");
 
-      function handlePlay() {
-        if (player) {
+      function handlePlay(event) {
+        if (!player.contains(event.target) && player.paused) {
           player.play();
           if (pulseText) pulseText.classList.add("hidden");
         }
       }
 
       document.body.addEventListener("click", handlePlay);
-
-      if (player) {
-        const playPromise = player.play();
-        if (playPromise !== undefined) {
-          playPromise.catch((error) => {
-            console.warn("自動播放失敗：", error);
-          });
-        }
-      }
     });
   </script>
 </body>
