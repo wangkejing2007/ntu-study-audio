@@ -12,6 +12,7 @@
             color: #333;
             text-align: center;
             padding: 60px 20px;
+            cursor: pointer;
         }
         h1 {
             font-size: 28px;
@@ -21,13 +22,26 @@
             width: 90%;
             max-width: 600px;
         }
+        .note {
+            font-size: 16px;
+            color: #666;
+            margin-top: 20px;
+        }
     </style>
 </head>
-<body>
-    <h1>🎧 聆聽讀書計畫</h1>
-    <audio controls autoplay>
+<body onclick="playAudio()">
+    <h1>🎧 點一下畫面開始聆聽</h1>
+    <audio id="player" controls>
         <source src="audio.mp3" type="audio/mpeg">
         您的瀏覽器不支援音訊播放。
     </audio>
+    <div class="note">⚠️ 若未自動播放，請再次點擊畫面或播放器。</div>
+
+    <script>
+        function playAudio() {
+            var player = document.getElementById("player");
+            player.play();
+        }
+    </script>
 </body>
 </html>
