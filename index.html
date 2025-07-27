@@ -6,9 +6,7 @@
     <title>聆聽讀書計畫</title>
     <style>
         html, body {
-            width: 800px;
-            height: 640px;
-            margin: 0 auto;
+            margin: 0;
             overflow: hidden;
         }
         body {
@@ -22,16 +20,24 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            width: 100vw;
         }
         h1 {
-            font-size: 36px;
+            font-size: 48px;
+            font-weight: bold;
             margin-bottom: 10px;
             color: #000;
         }
-        p {
-            margin: 0 0 20px;
-            font-size: 28px;
-            color: #000;
+        .pulse {
+            font-size: 20px;
+            color: #555;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { opacity: 0.2; }
         }
         audio {
             width: 80%;
@@ -42,11 +48,14 @@
             color: #666;
             margin-top: 20px;
         }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <h1>🎧 Tap to play</h1>
-    <p>點一下畫面開始播放</p>
+    <h1>🎧 Short-Term Goals</h1>
+    <div class="pulse">正在自動播放...</div>
     <audio id="player" controls autoplay aria-label="音訊播放器">
         <source src="audio.mp3" type="audio/mpeg">
         您的瀏覽器不支援音訊播放。
@@ -62,6 +71,10 @@
                     console.warn("自動播放失敗：", error);
                 });
             }
+
+            player.addEventListener("ended", () => {
+                player.classList.add("hidden");
+            });
         });
     </script>
 </body>
